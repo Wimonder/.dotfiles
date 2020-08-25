@@ -4,118 +4,56 @@
 #   \    /
 #    \/\/ 
 
+### Exports
+export EDITOR="nvim" # nvim is cool
+export TERM="xterm-256color" # Colors
+export HISTCONTROL=ignoredups:erasedups # No dupl entries
+export MANPAGER="/bin/sh -c \"col -b | vim --not-a-term -c 'set ft=man ts=8 nomod nolist noma' -\"" # Sets vim as manpager
+
+# If not interactive, skip
 [[ $- != *i* ]] && return
 
-colors() {
-	local fgc bgc vals seq0
+### Prompt
+PS1='[\u@\h \W]\$ '
 
-	printf "Color escapes are %s\n" '\e[${value};...;${value}m'
-	printf "Values 30..37 are \e[33mforeground colors\e[m\n"
-	printf "Values 40..47 are \e[43mbackground colors\e[m\n"
-	printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
-
-	# foreground colors
-	for fgc in {30..37}; do
-		# background colors
-		for bgc in {40..47}; do
-			fgc=${fgc#37} # white
-			bgc=${bgc#40} # black
-
-			vals="${fgc:+$fgc;}${bgc}"
-			vals=${vals%%;}
-
-			seq0="${vals:+\e[${vals}m}"
-			printf "  %-9s" "${seq0:-(default)}"
-			printf " ${seq0}TEXT\e[m"
-			printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
-		done
-		echo; echo
-	done
-}
-
-[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
-
-# Change the window title of X terminals
-case ${TERM} in
-	xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*)
-		PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
-		;;
-	screen*)
-		PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
-		;;
-esac
-
-use_color=true
-
-# Set colorful PS1 only on colorful terminals.
-# dircolors --print-database uses its own built-in database
-# instead of using /etc/DIR_COLORS.  Try to use the external file
-# first to take advantage of user additions.  Use internal bash
-# globbing instead of external grep binary.
-safe_term=${TERM//[^[:alnum:]]/?}   # sanitize TERM
-match_lhs=""
-[[ -f ~/.dir_colors   ]] && match_lhs="${match_lhs}$(<~/.dir_colors)"
-[[ -f /etc/DIR_COLORS ]] && match_lhs="${match_lhs}$(</etc/DIR_COLORS)"
-[[ -z ${match_lhs}    ]] \
-	&& type -P dircolors >/dev/null \
-	&& match_lhs=$(dircolors --print-database)
-[[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] && use_color=true
-
-if ${use_color} ; then
-	# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
-	if type -P dircolors >/dev/null ; then
-		if [[ -f ~/.dir_colors ]] ; then
-			eval $(dircolors -b ~/.dir_colors)
-		elif [[ -f /etc/DIR_COLORS ]] ; then
-			eval $(dircolors -b /etc/DIR_COLORS)
-		fi
-	fi
-
-	if [[ ${EUID} == 0 ]] ; then
-		PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
-	else
-		PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
-	fi
-
-	alias ls='ls --color=auto'
-	alias grep='grep --colour=auto'
-	alias egrep='egrep --colour=auto'
-	alias fgrep='fgrep --colour=auto'
-else
-	if [[ ${EUID} == 0 ]] ; then
-		# show root@ when we don't have colors
-		PS1='\u@\h \W \$ '
-	else
-		PS1='\u@\h \w \$ '
-	fi
+### Path stuffs
+if [ -d "$HOME/.bin" ] ;
+  then PATH="$HOME/.bin:$PATH"
 fi
 
-unset use_color safe_term match_lhs sh
+if [ -d "$HOME/.local/bin" ] ;
+  then PATH="$HOME/.local/bin:$PATH"
+fi
 
-alias cp="cp -i"                          # confirm before overwriting something
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
-alias np='nano -w PKGBUILD'
-alias more=less
+### Change the window title of X terminals
+case ${TERM} in
+  xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|alacritty|st|konsole*)
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
+        ;;
+  screen*)
+    PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
+    ;;
+esac
 
-xhost +local:root > /dev/null 2>&1
-
-complete -cf sudo
-
-# Bash won't get SIGWINCH if another process is in the foreground.
-# Enable checkwinsize so that bash will check the terminal size when
-# it regains control.  #65623
-# http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
+### Shopt stuff
+# If set, a command name that is the name of a directory is executed as if it were the argument to the cd command.
+shopt -s autocd
+# If set, minor errors in the spelling of a directory component in a cd command will be corrected. The errors checked for are transposed characters, a missing character, and a character too many. If a correction is found, the corrected path is printed, and the command proceeds.
+shopt -s cdspell
+# If set, Bash attempts to save all lines of a multiple-line command in the same history entry. This allows easy re-editing of multi-line commands.
+shopt -s cmdhist
+# If set, Bash includes filenames beginning with a ‘.’ in the results of filename expansion. The filenames ‘.’ and ‘..’ must always be matched explicitly, even if dotglob is set.
+shopt -s dotglob
+# If set, the history list is appended to the file named by the value of the HISTFILE variable when the shell exits, rather than overwriting the file.
+shopt -s histappend
+# If set, aliases are expanded as described below under aliases.
+shopt -s expand_aliases 
+# If set, Bash checks the window size after each external (non-builtin) command and, if necessary, updates the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-shopt -s expand_aliases
+# Ignore upper and lowercase when TAB completion
+bind "set completion-ignore-case on"
 
-# export QT_SELECT=4
-
-# Enable history appending instead of overwriting.  #139609
-shopt -s histappend
-
-#
 # # ex - archive extractor
 # # usage: ex <file>
 ex ()
@@ -139,4 +77,50 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
+
+### Aliases
+# Root stuff
+alias doas="doas --"
+# Vim stuff
+alias vim="nvim"
+# Package management
+alias unlock="sudo rm /var/lib/pacman/db.lck"    # remove pacman lock
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq)' # remove orphaned packages
+# Use exa instead of ls
+alias ls='exa -al --color=always --group-directories-first' # my preferred listing
+alias la='exa -a --color=always --group-directories-first'  # all files and dirs
+alias ll='exa -l --color=always --group-directories-first'  # long format
+alias lt='exa -aT --color=always --group-directories-first' # tree listing
+alias l.='exa -a | egrep "^\."'
+# Grep with colors
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+# Require confirmation
+alias cp="cp -i"
+alias mv='mv -i'
+alias rm='rm -i'
+# Adding extra flags to some commands
+alias df='df -h'     # human-readable sizes
+alias free='free -m' # show sizes in MB
+# More equals less
+alias more=less
+# Top memory and cpu using processes
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+alias pscpu='ps auxf | sort -nr -k 3'
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+# Shutdown and reboot
+alias ssn="sudo shutdown now"
+alias sr="sudo reboot"
+# Error messages from journalctl
+alias jctl="journalctl -p 3 -xb"
+# Different shells
+alias gobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
+alias gozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
+alias gofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
+# Bare git repo alias for dotfiles
 alias config='/usr/bin/git --git-dir=/home/wimon/.cfg/ --work-tree=/home/wimon'
+
+### Now give this shell some colors
+/opt/shell-color-scripts/colorscript.sh random
