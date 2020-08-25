@@ -1,6 +1,8 @@
-#
-# ~/.bashrc
-#
+# __      __
+# \ \    / / Wim's bashrc file
+#  \ \/\/ /  Some basic configuration
+#   \    /
+#    \/\/ 
 
 [[ $- != *i* ]] && return
 
