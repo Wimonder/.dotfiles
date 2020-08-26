@@ -59,48 +59,54 @@ URxvt.keysym.M-c: perl:clipboard:copy
 URxvt.keysym.M-v: perl:clipboard:paste
 URxvt*depth: 32
 
+#define oxide_00_black      	#212121
+#define oxide_01_red        	#e57373
+#define oxide_02_green      	#a6bc69
+#define oxide_03_yellow     	#fac863
+#define oxide_04_blue       	#6699cc
+#define oxide_05_magenta    	#c594c5
+#define oxide_06_cyan       	#5fb3b3
+#define oxide_07_white      	#c0c5ce
+#define oxide_08_bright_black   #5c5c5c
+#define oxide_15_bright_white   #f3f4f5
 
-! Palenight Xresources palette
-!! COLORS
+URxvt*foreground:   oxide_07_white
+URxvt*background:   [95]oxide_00_black
+URxvt*cursorColor:  oxide_07_white
 
-! special
-URxvt*foreground:   #bbc5ff
-URxvt*background:   [95]#282a36
-URxvt*cursorColor:  #bbc5ff
-
-XTerm*foreground: #bbc5ff
-XTerm*background: #282a36
-XTerm*cursorColor: #bbc5ff
+XTerm*foreground: oxide_07_white
+XTerm*background: oxide_00_black
+XTerm*cursorColor: oxide_07_white
 
 ! black
-*.color0:       #101010  !! originally #292d3e
-*.color8:       #434758
+*.color0:       oxide_00_black
+*.color8:       oxide_08_bright_black
 
 ! red
-*.color1:       #f07178
-*.color9:       #ff8b92
+*.color1:       oxide_01_red
+*.color9:       oxide_01_red
 
 ! green
-*.color2:       #c3e88d
-*.color10:      #ddffa7
+*.color2:       oxide_02_green
+*.color10:      oxide_02_green
 
 ! yellow
-*.color3:       #ffcb6b
-*.color11:      #ffe585
+*.color3:       oxide_03_yellow
+*.color11:      oxide_03_yellow
 
 ! blue
-*.color4:       #82aaff
-*.color12:      #9cc4ff
+*.color4:       oxide_04_blue
+*.color12:      oxide_04_blue
 
 ! magenta
-*.color5:       #c792ea
-*.color13:      #e1acff
+*.color5:       oxide_05_magenta
+*.color13:      oxide_05_magenta
 
 ! cyan
-*.color6:       #89ddff
-*.color14:      #a3f7ff
+*.color6:       oxide_06_cyan
+*.color14:      oxide_06_cyan
 
 ! white
-*.color7:       #d0d0d0
-*.color15:      #ffffff
+*.color7:       oxide_07_white
+*.color15:      oxide_15_bright_white
 
