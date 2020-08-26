@@ -1,23 +1,54 @@
+" General
+set nocompatible
+set relativenumber
+set smarttab
+set cindent
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set gdefault
+set history=500
+set hlsearch
+set ignorecase
+set undofile " Persistent Undo
+set ttyfast " Send more characters at a given time
+set splitbelow " New window goes below
+set splitright " New windows goes right
+set smartcase " Ignore 'ignorecase' if search patter contains uppercase characters
+set shortmess=atI " Don't show the intro message when starting vim
+set ruler " Show the cursor position
+set report=0 " Show all changes
+set nowrap " Do not wrap lines
+set ofu=syntaxcomplete#Complete " Set omni-completion method
+set nostartofline " Don't reset cursor to start of line when moving around
+set noshowmode " Don't show the current mode (airline.vim takes care of us)
+
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
-
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree'
-"Plug 'tsony-tsonev/nerdtree-git-plugin'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
 Plug 'scrooloose/nerdcommenter'
-"Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'chrisbra/Colorizer'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dikiaap/minimalist'
 Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
 Plug 'sheerun/vim-polyglot'
+Plug 'vim-airline/vim-airline'
 " Initialize plugin system
 call plug#end()
+
+" Airline.
+let g:airline_theme='minimalist'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#hunks#non_zero_only = 1
 
 inoremap jk <ESC>
 nmap <C-n> :NERDTreeToggle<CR>
@@ -55,23 +86,20 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 "autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 
+""""""""""""""""""""" ctrlp
 " ctrlp
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+""""""""""""""""""""" Base config
 
 " j/k will move virtual lines (lines that wrap)
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
-set relativenumber
-
-set smarttab
-set cindent
-set tabstop=2
-set shiftwidth=2
-" always uses spaces instead of tab characters
-set expandtab
 
 colorscheme minimalist 
+
+""""""""""""""""""""" NERDTree
 
 " sync open file with NERDTree
 " " Check if NERDTree is open or active
@@ -91,6 +119,7 @@ endfunction
 " Highlight currently open buffer in NERDTree
 autocmd BufEnter * call SyncTree()
 
+""""""""""""""""""" COC
 " coc config
 let g:coc_global_extensions = [
   \ 'coc-snippets',
