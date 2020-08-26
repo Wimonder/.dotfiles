@@ -1,4 +1,3 @@
-<div align="center">
 # .dotfiles for [i3 + i3-gaps + i3blocks + fish + neofetch + neovim + termite]
 ## Still a wip!
 A repository containing my dotfiles.
@@ -16,5 +15,3 @@ A repository containing my dotfiles.
   - i3
   - i3blocks
   - termite
-  
-</div>
