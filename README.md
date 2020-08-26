@@ -10,7 +10,6 @@ A repository containing my dotfiles.
   - Neovim
     - Minimalist theme
     - Many plugins
-  - tmux
 - GUI Configs
   - i3
   - i3blocks
