@@ -16,6 +16,7 @@ yay -S ${packages[@]} --noconfirm --needed
 # Install oh my fish
 # curl -L https://get.oh-my.fish | fish
 curl -L https://get.oh-my.fish > install
+chmod u+r+x ./install
 ./install --noninteractive --path=~/.local/share/omf --config=~/.config/omf
 rm -f ./install
 # Neovim setup
