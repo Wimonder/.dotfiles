@@ -14,7 +14,9 @@ packages=( 'fish' 'neovim' 'nerd-fonts-fira-code' 'i3blocks' 'i3lock-fancy-git' 
 yay -S ${packages[@]} --noconfirm --needed
 
 # Install oh my fish
-curl -L https://get.oh-my.fish | fish
+# curl -L https://get.oh-my.fish | fish
+curl -L https://get.oh-my.fish > install
+fish install --path=~/.local/share/omf --config=~/.config/omf
 # Setup fish
 # omf install bobthefish # Theme
 
