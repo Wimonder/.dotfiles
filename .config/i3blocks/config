@@ -1,0 +1,41 @@
+# i3blocks config file
+color=#f3f4f5
+separator_block_width=20
+markup=pango
+
+[arch-update]
+command=checkupdates | wc -l
+interval=once
+label=<span color="#1793D1"> </span>
+
+[gpu-load]
+command=~/.config/i3blocks/gpu-load/gpu-load | awk 'FNR==1{ printf "%s %s\n", $1, $2 }'
+label=<span color="#ffb86c"> </span>
+interval=2
+
+[gpu-temperature]
+command=~/.config/i3blocks/temperature/temperature
+interval=2
+SENSOR_CHIP="k10temp-pci-00c3"
+label=<span color="#ffb86c"> </span>
+
+[cpu_usage]
+command=~/.config/i3blocks/cpu_usage/cpu_usage
+interval=2
+label=<span color="#8be9fd"> </span>
+
+[cpu-temperature]
+command=~/.config/i3blocks/temperature/temperature
+interval=2
+SENSOR_CHIP="jc42-i2c-0-1a"
+label=<span color="#8be9fd"> </span>
+
+[time]
+command=date '+%I:%M'
+interval=1
+label=<span color="#ffb86c"> </span>
+
+[date]
+command=date '+%A %e'
+interval=60
+label=<span color="#8be9fd"> </span>
