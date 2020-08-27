@@ -1,0 +1,12 @@
+[user]
+	email = wim.onderbeke@zoho.eu
+	name = Wim Onderbeke
+[core]
+  editor = vim
+[push]
+  default = simple
+[pull]
+  ff = only
+[merge]
+  tool = vimdiff
+
