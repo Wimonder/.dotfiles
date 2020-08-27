@@ -40,6 +40,7 @@ Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'vimlab/split-term.vim'
+Plug 'wakatime/vim-wakatime'
 " Initialize plugin system
 call plug#end()
 
