@@ -31,12 +31,15 @@ nvim +'PlugInstall --sync' +qa
 [ ! -d "$HOME/.config/i3blocks" ] && mkdir -p "$HOME/.config/i3blocks"
 
 if [ ! -d "$HOME/.config/i3blocks/.git" ]; then
+  mv $HOME/.config/i3blocks/config ./config.tmp
   pushd "$HOME/.config/i3blocks"
+  
   git init
   git remote add origin https://github.com/vivien/i3blocks-contrib
   git fetch origin
   git checkout -b master --track origin/master
   popd
+  mv ./config.tmp $HOME/.config/i3blocks/config
 fi
 
 echo -e "Installation succesful!\nYou now have a working setup with my dotfiles."
