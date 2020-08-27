@@ -8,7 +8,7 @@ sudo pacman -Syy
 sudo pacman -S yay --noconfirm --needed
 
 # Packages variable
-packages=( 'fish' 'neovim' 'nerd-fonts-fira-code' 'i3blocks' 'i3lock-fancy-git' 'termite' 'dunst' 'picom' 'rofi' 'neofetch' )
+packages=( 'fish' 'exa' 'neovim' 'nerd-fonts-fira-code' 'i3blocks' 'i3lock-fancy-git' 'termite' 'dunst' 'picom' 'rofi' 'neofetch' )
 
 # Install packages
 yay -S ${packages[@]} --noconfirm --needed
