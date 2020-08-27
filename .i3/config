@@ -250,7 +250,7 @@ mode "resize" {
 }
 
 # Lock screen
-bindsym $mod+9 exec --no-startup-id blurlock
+bindsym $mod+9 exec --no-startup-id i3lock-fancy -f Source-Sans-Pro
 
 set_from_resource $black       color0
 set_from_resource $brightblack color8
