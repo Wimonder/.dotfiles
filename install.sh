@@ -8,7 +8,7 @@ sudo pacman -Syy
 sudo pacman -S yay --noconfirm --needed
 
 # Packages variable
-packages=( 'node' 'i3lock-color' 'fish' 'exa' 'neovim' 'nerd-fonts-fira-code' 'i3blocks' 'i3lock-fancy-git' 'termite' 'dunst' 'picom' 'rofi' 'neofetch' )
+packages=( 'node' 'noto-fonts-emoji' 'i3lock-color' 'fish' 'exa' 'neovim' 'nerd-fonts-fira-code' 'i3blocks' 'i3lock-fancy-git' 'termite' 'dunst' 'picom' 'rofi' 'neofetch' )
 
 # Install packages
 yay -S ${packages[@]} --noconfirm --needed
@@ -38,6 +38,9 @@ if [ ! -d "$HOME/.config/i3blocks/.git" ]; then
   git checkout -b master --track origin/master
   popd
 fi
+
+# Extra fish configuration
+sudo pip install wakatime
 
 echo -e "Installation succesful!\nYou now have a working setup with my dotfiles."
 exit 0
