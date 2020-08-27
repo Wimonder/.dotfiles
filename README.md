@@ -38,5 +38,6 @@ if [ $? = 0 ]; then
 fi;
 config checkout
 config config status.showUntrackedFiles no
-bash $HOME/install.sh
+chmod u+r+x $HOME/install.sh
+$HOME/install.sh
 ```
