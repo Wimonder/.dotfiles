@@ -43,7 +43,7 @@ alias gobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
 alias gozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
 alias gofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
 # Bare git repo alias for dotfiles
-alias config='/usr/bin/git --git-dir=/home/wimon/.cfg/ --work-tree=/home/wimon'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 
 set -g theme_display_git yes
