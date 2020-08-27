@@ -275,7 +275,7 @@ bar {
     strip_workspace_numbers yes
 
     colors {
-        background  $black
+        background  #1C1C1C 
         statusline  #dddddd
         separator   #666666
         # class             border  backgr. text
