@@ -1,4 +1,4 @@
-# .dotfiles for [i3 + i3-gaps + i3blocks + fish + neofetch + neovim + termite + dunst]
+# .dotfiles for [i3 + i3-gaps + i3blocks + fish + neofetch + neovim + termite + dunst + rofi]
 ## Still a wip!
 A repository containing my dotfiles.
 ------
