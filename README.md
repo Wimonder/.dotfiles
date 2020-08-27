@@ -3,15 +3,20 @@
 A repository containing my dotfiles.
 ------
 ## Details
-- CLI Configs
+- CLI
   - Fish
     - Oh My Fish
   - Bash
   - Neovim
     - Minimalist theme
     - Many plugins
-- GUI Configs
+  - FiraCode Nerd Font Mono
+- GUI
   - i3
   - i3blocks
+  - i3lock-fancy
   - termite
   - dunst
+  - picom
+  - rofi
+  - FiraCode Nerd Font Mono
