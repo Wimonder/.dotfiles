@@ -8,6 +8,7 @@ A repository containing my dotfiles.
     - Oh My Fish
   - Bash
   - Neovim
+    - vim-airline
     - Minimalist theme
     - Many plugins
   - FiraCode Nerd Font Mono
