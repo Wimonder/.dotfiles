@@ -1,27 +1,44 @@
 " General
 set nocompatible
-set relativenumber
-set smarttab
-set cindent
-set tabstop=2
-set shiftwidth=2
-set expandtab
 set gdefault
 set history=500
-set hlsearch
-set ignorecase
-set undofile " Persistent Undo
-set ttyfast " Send more characters at a given time
-set splitbelow " New window goes below
-set splitright " New windows goes right
-set smartcase " Ignore 'ignorecase' if search patter contains uppercase characters
-set shortmess=atI " Don't show the intro message when starting vim
-set ruler " Show the cursor position
-set report=0 " Show all changes
-set nowrap " Do not wrap lines
-set ofu=syntaxcomplete#Complete " Set omni-completion method
-set nostartofline " Don't reset cursor to start of line when moving around
-set noshowmode " Don't show the current mode (airline.vim takes care of us)
+set undofile " persistent Undo
+set ttyfast " send more characters at a given time
+set splitbelow " new window goes below
+set splitright " new windows goes right
+set shortmess=atI " don't show the intro message when starting vim
+set ruler " show the cursor position
+set report=0 " show all changes
+set nowrap " do not wrap lines
+set ofu=syntaxcomplete#Complete " set omni-completion method
+set nostartofline " don't reset cursor to start of line when moving around
+set noshowmode " don't show the current mode (airline.vim takes care of us)
+" Tabs & Spaces
+set tabstop=4       " number of visual spaces per TAB
+set softtabstop=4   " number of spaces in tab when editing
+set shiftwidth=4    " number of spaces to use for autoindent
+set expandtab       " tabs are space
+set autoindent
+set copyindent      " copy indent from the previous line
+" Clipboard {{{
+set clipboard+=unnamedplus
+" UI stuff
+set relativenumber  " relative line numbers
+set cursorline      " hightlight current line
+set wildmenu        " visual autocomplete for command menu
+set showmatch       " highlight matching brace
+set laststatus=2    " window will always have a status line
+" Search
+set incsearch       " search as characters are entered
+set hlsearch        " highlight matches
+set ignorecase      " ignore case when searching
+set smartcase       " ignore case if search pattern is lower case
+                    " case-sensitive otherwise
+
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
