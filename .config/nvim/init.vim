@@ -23,6 +23,7 @@ set copyindent      " copy indent from the previous line
 " Clipboard {{{
 set clipboard+=unnamedplus
 " UI stuff
+set number
 set relativenumber  " relative line numbers
 set cursorline      " hightlight current line
 set wildmenu        " visual autocomplete for command menu
@@ -35,10 +36,59 @@ set ignorecase      " ignore case when searching
 set smartcase       " ignore case if search pattern is lower case
                     " case-sensitive otherwise
 
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
+" Switch tabs
+nnoremap <C-r>  :tabnext<CR>
+nnoremap <C-t>  :tabnew<CR>
+
+" Remove newbie crutches in Insert Mode
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+inoremap <Up> <Nop>
+
+" Remove newbie crutches in Normal Mode
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+nnoremap <Up> <Nop>
+
+" Remove newbie crutches in Visual Mode
+vnoremap <Down> <Nop>
+vnoremap <Left> <Nop>
+vnoremap <Right> <Nop>
+vnoremap <Up> <Nop>
+
+" Terminal Function
+let g:term_buf = 0
+let g:term_win = 0
+function! TermToggle(height)
+    if win_gotoid(g:term_win)
+        hide
+    else
+        botright new
+        exec "resize " . a:height
+        try
+            exec "buffer " . g:term_buf
+        catch
+            call termopen($SHELL, {"detach": 0})
+            let g:term_buf = bufnr("")
+            set nonumber
+            set norelativenumber
+            set signcolumn=no
+        endtry
+        startinsert!
+        let g:term_win = win_getid()
+    endif
+endfunction
+
+" Toggle terminal on/off (neovim)
+nnoremap <A-t> :call TermToggle(10)<CR>
+inoremap <A-t> <Esc>:call TermToggle(10)<CR>
+tnoremap <A-t> <C-\><C-n>:call TermToggle(10)<CR>
+
+" Terminal go back to normal mode
+tnoremap <Esc> <C-\><C-n>
+tnoremap :q! <C-\><C-n>:q!<CR>
 
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
@@ -51,8 +101,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
 Plug 'scrooloose/nerdcommenter'
 Plug 'chrisbra/Colorizer'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'dikiaap/minimalist'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
