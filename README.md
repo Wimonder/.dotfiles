@@ -41,3 +41,8 @@ config config status.showUntrackedFiles no
 chmod u+r+x $HOME/install.sh
 $HOME/install.sh
 ```
+
+License
+-------
+
+All content is licensed under the terms of [The MIT License](LICENSE).
