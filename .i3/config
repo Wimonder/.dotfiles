@@ -285,7 +285,7 @@ bar {
 bindsym $mod+m bar mode toggle
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #ffffff #ffffff #ffffff #dddddd   #ffffff
+client.focused          #86888c #1C1C1C #ffffff #dddddd   #86888c
 client.focused_inactive #212121 #212121 #86888c #292d2e   #5a5a5a
 client.unfocused        #212121 #212121 #86888c #292d2e   #5a5a5a
 client.urgent           #d64e4e #d64e4e #ffffff #d64e4e   #d64e4e
